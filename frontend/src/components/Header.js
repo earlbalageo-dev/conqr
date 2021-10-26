@@ -4,11 +4,13 @@ import {
   Box,
   Toolbar,
   IconButton,
+  Button,
   Typography,
   Badge,
   MenuItem,
   Menu,
 } from '@mui/material';
+
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
@@ -122,10 +124,17 @@ const Header = () => {
               Conqr
             </Typography>
           </IconButton>
-
           <Box sx={{ flexGrow: 1 }} />
+
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton
+            <IconButton size='small' color='inherit'>
+              Login
+            </IconButton>
+
+            <Button size='medium' variant='contained' color='secondary'>
+              Get Started
+            </Button>
+            {/* <IconButton
               size='large'
               aria-label='show 4 new mails'
               color='inherit'
@@ -153,7 +162,7 @@ const Header = () => {
               color='inherit'
             >
               <AccountCircle />
-            </IconButton>
+            </IconButton> */}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
