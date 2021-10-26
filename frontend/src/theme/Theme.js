@@ -6,6 +6,14 @@ const Theme = createTheme({
       fontFamily: 'Playfair Display,serif',
       fontSize: 48,
     },
+    h3: {
+      fontFamily: 'Playfair Display,serif',
+      fontSize: 34,
+    },
+    body1: {
+      fontFamily: 'Playfair Display,serif',
+      fontSize: 20,
+    },
     caption: {
       color: '#fff',
       fontSize: 18,

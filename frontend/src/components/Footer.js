@@ -11,7 +11,7 @@ const FootContainer = styled('div')({
 const Footer = () => {
   return (
     <Box>
-      <AppBar position='sticky' color='secondary' sx={{ marginTop: '-64px' }}>
+      <AppBar position='sticky' color='secondary'>
         <Toolbar>
           <FootContainer>
             <Typography variant='body1' color='inherit'>
