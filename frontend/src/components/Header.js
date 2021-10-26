@@ -10,12 +10,12 @@ import {
   MenuItem,
   Menu,
 } from '@mui/material';
-
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
+import LinkContainer from './common/LinkContainer';
 const Header = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -118,22 +118,35 @@ const Header = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position='static'>
         <Toolbar>
-          <IconButton size='large' edge='start' color='inherit' sx={{ mr: 0 }}>
-            <BubbleChartIcon />
-            <Typography variant='h5' noWrap>
-              Conqr
-            </Typography>
-          </IconButton>
+          <LinkContainer to='/'>
+            <IconButton
+              size='large'
+              edge='start'
+              color='inherit'
+              sx={{ mr: 0 }}
+            >
+              <BubbleChartIcon />
+              <Typography variant='h5' noWrap>
+                Conqr
+              </Typography>
+            </IconButton>
+          </LinkContainer>
+
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <IconButton size='small' color='inherit'>
-              Login
-            </IconButton>
+            <LinkContainer to='/login'>
+              <IconButton sx={{ mx: '2rem ' }} size='small' color='inherit'>
+                Login
+              </IconButton>
+            </LinkContainer>
 
-            <Button size='medium' variant='contained' color='secondary'>
-              Get Started
-            </Button>
+            <LinkContainer to='/signup'>
+              <Button size='medium' variant='contained' color='secondary'>
+                Get Started
+              </Button>
+            </LinkContainer>
+
             {/* <IconButton
               size='large'
               aria-label='show 4 new mails'

@@ -10,9 +10,9 @@ import {
   Button,
   Link,
 } from '@mui/material';
+import LinkContainer from '../common/LinkContainer';
 import { makeStyles } from '@mui/styles';
 import React from 'react';
-import LinkContainer from '../common/LinkContainer';
 
 const useStyles = makeStyles({
   container: {
@@ -21,21 +21,42 @@ const useStyles = makeStyles({
     paddingBottom: '2rem',
   },
 });
-const LoginScreen = () => {
+const SignUpScreen = () => {
   const { container } = useStyles();
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('Logging In');
+    console.log('registering');
   };
   return (
     <Container maxWidth='xs' className={container}>
       <Paper elevation={24} sx={{ py: '2rem' }}>
         <Typography color='peimary' variant='h2'>
-          Login
+          Sign-up
         </Typography>
         <Box sx={{ p: '2rem' }} variant='form' onSubmit={handleSubmit}>
           <Grid spacing={2} container>
+            <Grid item xs={6}>
+              <TextField
+                autoComplete='given-name'
+                name='firstName'
+                required
+                fullWidth
+                id='firstName'
+                label='First Name'
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                required
+                fullWidth
+                id='lastName'
+                label='Last Name'
+                name='lastName'
+                autoComplete='family-name'
+              />
+            </Grid>
             <Grid item xs={12}>
               <TextField
                 required
@@ -57,6 +78,12 @@ const LoginScreen = () => {
                 autoComplete='new-password'
               />
             </Grid>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={<Checkbox value='allowExtraEmails' color='primary' />}
+                label='I want to receive, marketing promotions and updates via email.'
+              />
+            </Grid>
           </Grid>
           <Button
             type='submit'
@@ -64,13 +91,13 @@ const LoginScreen = () => {
             variant='contained'
             sx={{ mt: 3, mb: 2 }}
           >
-            Login
+            Sign Up
           </Button>
           <Grid container justifyContent='flex-end'>
             <Grid item>
-              <LinkContainer to='/signup'>
+              <LinkContainer to='/login'>
                 <Link href='#' color='secondary' variant='body2'>
-                  Need an account? Sign-up
+                  Already have an account? Sign in
                 </Link>
               </LinkContainer>
             </Grid>
@@ -81,4 +108,4 @@ const LoginScreen = () => {
   );
 };
 
-export default LoginScreen;
+export default SignUpScreen;

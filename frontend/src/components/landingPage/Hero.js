@@ -2,7 +2,7 @@ import { Grid, Typography, Button } from '@mui/material';
 import React from 'react';
 import { styled } from '@mui/system';
 import colabImg from '../../assets/images/colab.jpg';
-
+import LinkContainer from '../common/LinkContainer';
 const ImgContainer = styled(Grid)({
   minHeight: '80vh',
   backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${colabImg})`,
@@ -43,9 +43,11 @@ const Hero = () => {
           </HeroText>
         </Grid>
         <Grid item>
-          <Button color='primary' variant='contained' size='large'>
-            Get Started
-          </Button>
+          <LinkContainer to='/signup'>
+            <Button color='primary' variant='contained' size='large'>
+              Get Started
+            </Button>
+          </LinkContainer>
         </Grid>
       </Grid>
     </ImgContainer>

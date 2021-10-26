@@ -12,7 +12,7 @@ const Theme = createTheme({
     },
     body1: {
       fontFamily: 'Playfair Display,serif',
-      fontSize: 20,
+      fontSize: 12,
     },
     caption: {
       color: '#fff',
