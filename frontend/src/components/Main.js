@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 import LandingScreen from './screens/LandingScreen';
 import LoginScreen from './screens/LoginScreen';
 import SignUpScreen from './screens/SignUpScreen';
+import HomeScreen from './screens/HomeScreen';
 const Main = () => {
   return (
     <Box
@@ -17,6 +18,7 @@ const Main = () => {
         <Route path='/' component={LandingScreen} exact />
         <Route path='/signup' component={SignUpScreen} />
         <Route path='/login' component={LoginScreen} />
+        <Route path='/home' component={HomeScreen} />
       </Switch>
     </Box>
   );

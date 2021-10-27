@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../state/actions/userActions';
 import {
   AppBar,
   Box,
@@ -9,6 +11,8 @@ import {
   Badge,
   MenuItem,
   Menu,
+  Container,
+  Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -22,6 +26,10 @@ const Header = () => {
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const dispatch = useDispatch();
+
+  const { userInfo } = useSelector((state) => state.userLogin);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,6 +46,10 @@ const Header = () => {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   const menuId = 'primary-search-account-menu';
@@ -57,8 +69,15 @@ const Header = () => {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem disabled onClick={handleMenuClose}>
+        Account
+      </MenuItem>
+      <Divider />
+      <MenuItem onClick={handleMenuClose}>
+        {userInfo && `${userInfo.firstName} ${userInfo.lastName}`}
+      </MenuItem>
+      <Divider />
+      <MenuItem onClick={handleLogout}>Log out</MenuItem>
     </Menu>
   );
 
@@ -135,47 +154,53 @@ const Header = () => {
           <Box sx={{ flexGrow: 1 }} />
 
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <LinkContainer to='/login'>
-              <IconButton sx={{ mx: '2rem ' }} size='small' color='inherit'>
-                Login
-              </IconButton>
-            </LinkContainer>
+            {!userInfo ? (
+              <Container>
+                <LinkContainer to='/login'>
+                  <IconButton sx={{ mx: '2rem ' }} size='small' color='inherit'>
+                    Login
+                  </IconButton>
+                </LinkContainer>
 
-            <LinkContainer to='/signup'>
-              <Button size='medium' variant='contained' color='secondary'>
-                Get Started
-              </Button>
-            </LinkContainer>
-
-            {/* <IconButton
-              size='large'
-              aria-label='show 4 new mails'
-              color='inherit'
-            >
-              <Badge badgeContent={4} color='error'>
-                <MailIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size='large'
-              aria-label='show 17 new notifications'
-              color='inherit'
-            >
-              <Badge badgeContent={17} color='error'>
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
-            <IconButton
-              size='large'
-              edge='end'
-              aria-label='account of current user'
-              aria-controls={menuId}
-              aria-haspopup='true'
-              onClick={handleProfileMenuOpen}
-              color='inherit'
-            >
-              <AccountCircle />
-            </IconButton> */}
+                <LinkContainer to='/signup'>
+                  <Button size='medium' variant='contained' color='secondary'>
+                    Get Started
+                  </Button>
+                </LinkContainer>
+              </Container>
+            ) : (
+              <Container>
+                <IconButton
+                  size='large'
+                  aria-label='show 4 new mails'
+                  color='inherit'
+                >
+                  <Badge badgeContent={4} color='error'>
+                    <MailIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  size='large'
+                  aria-label='show 17 new notifications'
+                  color='inherit'
+                >
+                  <Badge badgeContent={17} color='error'>
+                    <NotificationsIcon />
+                  </Badge>
+                </IconButton>
+                <IconButton
+                  size='large'
+                  edge='end'
+                  aria-label='account of current user'
+                  aria-controls={menuId}
+                  aria-haspopup='true'
+                  onClick={handleProfileMenuOpen}
+                  color='inherit'
+                >
+                  <AccountCircle />
+                </IconButton>
+              </Container>
+            )}
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
@@ -192,7 +217,7 @@ const Header = () => {
         </Toolbar>
       </AppBar>
       {renderMobileMenu}
-      {renderMenu}
+      {userInfo && renderMenu}
     </Box>
   );
 };

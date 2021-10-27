@@ -21,11 +21,15 @@ const useStyles = makeStyles({
     paddingBottom: '2rem',
   },
 });
-const LoginScreen = () => {
+const LoginScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailValid, setEmailValid] = useState(true);
   const { container } = useStyles();
+
+  const dispatch = useDispatch();
+
+  const redirect = '/home';
 
   const isEmailValid = (e) => {
     e.preventDefault();
@@ -38,18 +42,20 @@ const LoginScreen = () => {
     }
   };
 
-  const dispatch = useDispatch();
-
   const { loading, error, userInfo } = useSelector((state) => state.userLogin);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(login(email, password));
   };
 
   useEffect(() => {
     //history push
-  }, []);
+    if (userInfo) {
+      history.push(redirect);
+    }
+  }, [userInfo, redirect, history]);
   return (
     <Container maxWidth='xs' className={container}>
       <Paper elevation={24} sx={{ py: '2rem' }}>
