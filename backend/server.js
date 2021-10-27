@@ -2,7 +2,9 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import connectDB from './db.js';
+import userRoutes from './routes/userRoutes.js';
 import morgan from 'morgan';
+
 const app = express();
 
 dotenv.config();
@@ -18,7 +20,7 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 //mount routes
-
+app.use('/', userRoutes);
 //middlewares
 
 //connect to server
