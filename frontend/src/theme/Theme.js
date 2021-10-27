@@ -14,10 +14,6 @@ const Theme = createTheme({
       fontFamily: 'Playfair Display,serif',
       fontSize: 12,
     },
-    caption: {
-      color: '#fff',
-      fontSize: 18,
-    },
   },
   palette: {
     primary: {

@@ -34,11 +34,10 @@ const registerUser = asyncHandler(async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      password: user.password,
     });
   } else {
     res.status(400);
-    throw new Error('Something went wrong in our part');
+    throw new Error('Something went wrong in our part, please try again');
   }
 });
 
@@ -56,7 +55,6 @@ const loginUser = asyncHandler(async (req, res) => {
       firstName: user.firstName,
       lastName: user.lastName,
       email: user.email,
-      password: user.password,
     });
   } else {
     res.status(401);

@@ -8,7 +8,6 @@ import {
   FormControlLabel,
   Checkbox,
   Button,
-  Link,
 } from '@mui/material';
 import LinkContainer from '../common/LinkContainer';
 import { makeStyles } from '@mui/styles';
@@ -31,13 +30,14 @@ const SignUpScreen = () => {
   return (
     <Container maxWidth='xs' className={container}>
       <Paper elevation={24} sx={{ py: '2rem' }}>
-        <Typography color='peimary' variant='h2'>
+        <Typography color='primary' variant='h2'>
           Sign-up
         </Typography>
         <Box sx={{ p: '2rem' }} variant='form' onSubmit={handleSubmit}>
           <Grid spacing={2} container>
             <Grid item xs={6}>
               <TextField
+                color='secondary'
                 autoComplete='given-name'
                 name='firstName'
                 required
@@ -49,6 +49,7 @@ const SignUpScreen = () => {
             </Grid>
             <Grid item xs={12} sm={6}>
               <TextField
+                color='secondary'
                 required
                 fullWidth
                 id='lastName'
@@ -59,6 +60,7 @@ const SignUpScreen = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                color='secondary'
                 required
                 fullWidth
                 id='email'
@@ -69,6 +71,7 @@ const SignUpScreen = () => {
             </Grid>
             <Grid item xs={12}>
               <TextField
+                color='secondary'
                 required
                 fullWidth
                 name='password'
@@ -96,9 +99,9 @@ const SignUpScreen = () => {
           <Grid container justifyContent='flex-end'>
             <Grid item>
               <LinkContainer to='/login'>
-                <Link href='#' color='secondary' variant='body2'>
+                <Typography color='secondary' variant='body2'>
                   Already have an account? Sign in
-                </Link>
+                </Typography>
               </LinkContainer>
             </Grid>
           </Grid>
