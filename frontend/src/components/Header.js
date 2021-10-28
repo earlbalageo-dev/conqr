@@ -153,14 +153,20 @@ const Header = () => {
 
           <Box sx={{ flexGrow: 1 }} />
 
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+          <Box sx={{ display: { md: 'flex' } }}>
             {!userInfo ? (
               <Container>
-                <LinkContainer to='/login'>
-                  <IconButton sx={{ mx: '2rem ' }} size='small' color='inherit'>
-                    Login
-                  </IconButton>
-                </LinkContainer>
+                <Box sx={{ display: { xs: 'none', md: 'inline' } }}>
+                  <LinkContainer to='/login'>
+                    <IconButton
+                      sx={{ mx: '2rem ' }}
+                      size='small'
+                      color='inherit'
+                    >
+                      Login
+                    </IconButton>
+                  </LinkContainer>
+                </Box>
 
                 <LinkContainer to='/signup'>
                   <Button size='medium' variant='contained' color='secondary'>
