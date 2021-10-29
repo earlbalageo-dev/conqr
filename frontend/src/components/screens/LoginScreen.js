@@ -14,6 +14,7 @@ import {
 import { makeStyles } from '@mui/styles';
 import LinkContainer from '../common/LinkContainer';
 import Loader from '../common/Loader';
+
 const useStyles = makeStyles({
   container: {
     textAlign: 'center',
@@ -21,6 +22,7 @@ const useStyles = makeStyles({
     paddingBottom: '2rem',
   },
 });
+
 const LoginScreen = ({ history, location }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

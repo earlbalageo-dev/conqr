@@ -14,6 +14,10 @@ const Theme = createTheme({
       fontFamily: 'Playfair Display,serif',
       fontSize: 12,
     },
+    select: {
+      fontSize: 12,
+      color: 'green',
+    },
   },
   palette: {
     primary: {

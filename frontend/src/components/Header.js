@@ -8,82 +8,33 @@ import {
   IconButton,
   Button,
   Typography,
-  Badge,
-  MenuItem,
-  Menu,
   Container,
-  Divider,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import BubbleChartIcon from '@mui/icons-material/BubbleChart';
 import LinkContainer from './common/LinkContainer';
-import MobileMenu from './common/MobileMenu';
+import UserAvatar from './common/UserAvatar';
+import HeaderMenu from './common/HeaderMenu';
+import UserMenu from './common/UserMenu';
 const Header = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+  const [menuAnchor, setMenuAnchor] = useState(null);
 
   const dispatch = useDispatch();
 
   const { userInfo } = useSelector((state) => state.userLogin);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
   const handleLogout = () => {
+    handleCloseMenu();
     dispatch(logout());
   };
 
-  const menuId = 'primary-search-account-menu';
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem disabled onClick={handleMenuClose}>
-        Account
-      </MenuItem>
-      <Divider />
-      <MenuItem onClick={handleMenuClose}>
-        {userInfo && `${userInfo.firstName} ${userInfo.lastName}`}
-      </MenuItem>
-      <Divider />
-      <MenuItem onClick={handleLogout}>Log out</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = 'primary-search-account-menu-mobile';
-  const renderMobileMenu = <MobileMenu />;
+  //Open/Close Menu
+  const handleOpenMenu = (e) => {
+    setMenuAnchor(e.currentTarget);
+  };
+  const handleCloseMenu = () => {
+    setMenuAnchor(null);
+  };
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -107,14 +58,10 @@ const Header = () => {
 
           <Box sx={{ display: { md: 'flex' } }}>
             {!userInfo ? (
-              <Container>
+              <Container sx={{ px: '0 !important' }}>
                 <Box sx={{ display: { xs: 'none', md: 'inline' } }}>
                   <LinkContainer to='/login'>
-                    <IconButton
-                      sx={{ mx: '2rem ' }}
-                      size='small'
-                      color='inherit'
-                    >
+                    <IconButton sx={{ mx: 2 }} size='small' color='inherit'>
                       Login
                     </IconButton>
                   </LinkContainer>
@@ -125,57 +72,32 @@ const Header = () => {
                     Get Started
                   </Button>
                 </LinkContainer>
+
+                <IconButton
+                  onClick={handleOpenMenu}
+                  sx={{ ml: 2, p: 0, display: { md: 'none' } }}
+                >
+                  <MenuIcon color='inherit' />
+                </IconButton>
+
+                <HeaderMenu anchor={menuAnchor} closeMenu={handleCloseMenu} />
               </Container>
             ) : (
-              <Container>
-                <IconButton
-                  size='large'
-                  aria-label='show 4 new mails'
-                  color='inherit'
-                >
-                  <Badge badgeContent={4} color='error'>
-                    <MailIcon />
-                  </Badge>
+              <Container sx={{ px: '0 !important' }}>
+                <IconButton onClick={handleOpenMenu}>
+                  <UserAvatar initials={userInfo.initials} />
                 </IconButton>
-                <IconButton
-                  size='large'
-                  aria-label='show 17 new notifications'
-                  color='inherit'
-                >
-                  <Badge badgeContent={17} color='error'>
-                    <NotificationsIcon />
-                  </Badge>
-                </IconButton>
-                <IconButton
-                  size='large'
-                  edge='end'
-                  aria-label='account of current user'
-                  aria-controls={menuId}
-                  aria-haspopup='true'
-                  onClick={handleProfileMenuOpen}
-                  color='inherit'
-                >
-                  <AccountCircle />
-                </IconButton>
+                <UserMenu
+                  anchor={menuAnchor}
+                  closeMenu={handleCloseMenu}
+                  userInfo={userInfo}
+                  logout={handleLogout}
+                />
               </Container>
             )}
           </Box>
-          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
-            <IconButton
-              size='large'
-              aria-label='show more'
-              aria-controls={mobileMenuId}
-              aria-haspopup='true'
-              onClick={handleMobileMenuOpen}
-              color='inherit'
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
         </Toolbar>
       </AppBar>
-      {renderMobileMenu}
-      {userInfo && renderMenu}
     </Box>
   );
 };
